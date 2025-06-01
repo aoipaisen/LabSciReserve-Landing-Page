@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SciLabReserve</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Squada+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <div class="logo">
+      <img src="imgs/LabReservelogo.png" class="lab-reserve-logo">
+      <span class="brand-name">SciLabReserve</span>
+    </div>
+    <nav>
+      <a href="#">Features</a>
+      <a href="#">How</a>
+      <button onclick="signUp()">Sign up</button>
+      <button onclick="login()">Login</button>
+    </nav>
+  </div>
+</header>
+
+
+  <main>
+    <section>
+        <div class="section-uno">
+            <img src="imgs/section1chemflasklogo.png" class="chemflask">
+            <div class="hero">
+                <h4>Pamantasan ng Lungsod ng San Pablo</h4>
+                <h1><span class="black">Science Laboratory</span>
+                    <div>
+                        <span class="green">Reservation</span> and <span class="green">Inventory</span><br>System
+                    </div>
+                    
+                </h1>
+                <p class="tagline">“Advancing Academic Excellence Through Efficient Laboratory Management.”</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+  <div class="item1">
+    <h2>Features</h2>
+    <p>SciLabReserve provides a seamless experience for students, faculty, and administrators with the following key features:</p>
+  </div>
+
+  <div class="item2">
+    <img src="imgs/reserve.png" alt="Reserve" />
+  </div>
+  <div class="item2">
+    <img src="imgs/inventory.png" alt="Inventory" />
+  </div>
+  <div class="item2">
+    <img src="imgs/schedule.png" alt="Schedule" />
+  </div>
+</section>
+
+      <ul class="item3">
+        <li><strong>Online Reservation</strong> - Quickly book science laboratory rooms, equipment, and chemicals.</li>
+        <li><strong>Inventory Management</strong> - Track usage and stock levels of lab resources.</li>
+        <li><strong>Conflict Prevention</strong> - Avoid double bookings with built-in schedule checks.</li>
+      </ul>
+    </section>
+
+    <section class="how-it-works">
+      <h3>How it works:</h3>
+      <div class="steps">
+        <div class="step"><strong>Step 1:</strong><br> Sign up or Login<br><br>Create an account or log in using your credentials</div>
+        <div class="step"><strong>Step 2:</strong><br> Check Availability<br><br>Use the inventory or schedule view to see available labs, equipment, or chemicals</div>
+        <div class="step"><strong>Step 3:</strong><br> Make a Reservation<br><br>Fill out the reservation form with your preferred date, time, and resource</div>
+        <div class="step"><strong>Step 4:</strong><br> Wait for Approval<br><br>Your request will be reviewed and confirmed by the admin</div>
+        <div class="step"><strong>Step 5:</strong><br> Use the Resource<br><br>Go to the science laboratory at the reserved time and use the approved resource</div>
+      </div>
+      <button class="cta" onclick="reserveNow()">Reserve Now!</button>
+    </section>
+  </main>
+
+  <footer>
+    <div>© 2025 SciLabReserve - All rights reserved</div>
+    <div class="socials">
+      <img src="imgs/fb-logo.png" class="social-logos">
+      <img src="imgs/ig.png" class="social-logos">
+      <img src="imgs/github.png" class="social-logos">
+      <img src="imgs/x.png" class="social-logos">
+    </div>
+    <div>Contacts</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
