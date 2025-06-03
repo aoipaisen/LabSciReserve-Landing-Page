@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SciLabReserve</title>
+  <link rel="stylesheet" href="css/signup.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Lato&family=Squada+One&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <main>
+    <div class="bg1">
+      <img src="imgs/erm.png" class="image-container" alt="SciLabReserve Illustration" />
+    </div>
+    <button id="startSignupBtn" class="start-btn">Sign Up Now</button>
+    <div class="column2" style="position: relative;">
+      
+
+      <form id="signupForm" class="form-section">
+        <header>Create an Account</header>
+        <p class="signup-text">Already have an account? <a href="log-in.html">Log-in</a>
+        <h2>Sign Up</h2>
+        
+        <label for="userRole">Select Role:</label>
+        <select id="userRole">
+          <option value="">-- --</option>
+          <option value="student">Student</option>
+          <option value="faculty">Faculty</option>
+        </select>
+
+        <input type="text" name="firstName" placeholder="First Name" required />
+        <input type="text" name="lastName" placeholder="Last Name" required />
+
+        <div id="studentIdGroup" style="display: none;">
+          <input type="text" name="studentId" placeholder="Student ID" />
+        </div>
+
+        <label for="departmentSelect">Department:</label>
+        <select name="department" id="departmentSelect">
+          <option value="accountancy">College of Accountancy</option>
+          <option value="education">College of Teacher Education</option>
+          <option value="engineering">College of Engineering</option>
+          <option value="nursing">College of Nursing and Allied Health Sciences</option>
+          <option value="human-kinetics">College of Human Kinetics</option>
+          <option value="computer-studies">College of Computer Studies and Technology</option>
+          <option value="business">College of Business Administration</option>
+          <option value="tourism">College of Tourism and Hospitality Management</option>
+          <option value="arts-sciences">College of Arts and Sciences</option>
+        </select>
+
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <input type="password" id="rePassword" placeholder="Re-enter Password" required />
+        <div id="passError" class="error"></div>
+
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  </main>
+
+  <a href="index.html">
+    <img src="imgs/homebtn.png" id="homeBtn" class="home-btn">
+  </a>
+  <script src="javascript/signup.js"></script>
+</body>
+</html>
