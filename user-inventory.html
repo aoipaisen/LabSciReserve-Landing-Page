@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SciLabReserve</title>
+  <link rel="stylesheet" href="css/userinventory.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Squada+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="imgs/LabReservelogo.png" class="lab-reserve-logo">
+                <span class="brand-name">SciLabReserve</span>
+            </a>
+</header>
+
+
+<main class="content">
+    <section class="inventory-section">
+        <div class="inventory-header">
+    <input type="text" id="itemName" placeholder="Enter item name" />
+    
+    <select id="itemCategory">
+      <option value="chemical">Chemical</option>
+      <option value="equipment">Equipment</option>
+    </select>
+    
+    <button onclick="checkAvailability()">Check Availability</button>
+  </div>
+
+        <div class="inventory-grid">
+            <div class="grid-header">Item Name</div>
+            <div class="grid-header">Quantity</div>
+            <div class="grid-header">Category</div>
+
+                    <div>Beaker</div>
+                    <div>15</div>
+                    <div>Equipment</div>
+
+                    <div>Test Tubes</div>
+                    <div>30</div>
+                    <div>Equipment</div>
+
+                    <div>Microscope</div>
+                    <div>8</div>
+                    <div>Equipment</div>
+
+                    <div>Sulfuric Acidd</div>
+                    <div>20</div>
+                    <div>Chemical</div>
+
+        </div>
+    </section>
+</main>
+
+    
+
+
+<footer>
+    <div>© 2025 SciLabReserve - All rights reserved</div>
+        <div class="socials">
+            <img src="imgs/fb-logo.png" class="social-logos">
+            <img src="imgs/ig.png" class="social-logos">
+            <img src="imgs/github.png" class="social-logos">
+            <img src="imgs/x.png" class="social-logos">
+        </div>
+    <div>Contacts</div>
+</footer>
+
+  <script src="javascript/userinventory.js"></script>
+</body>
+</html>

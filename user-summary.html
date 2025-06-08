@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/usersummary.css">
+</head>
+<body>
+    <!-- Header placeholder - can be replaced later -->
+    <div class="header-placeholder">
+        <header>
+  <div class="header-container">
+    <a href="index.html" class="logo">
+      <img src="imgs/LabReservelogo.png" class="lab-reserve-logo" alt="Logo">
+      <span class="brand-name">SciLabReserve</span>
+    </a>
+    <nav>
+      <a href="user-inventory.html">Inventory</a>
+      <a href="#">Reservations</a>
+      <button>Logout</button>
+    </nav>
+  </div>
+</header>
+    </div>
+    
+    <div class="container">
+        <div class="reservation-card">
+            <div class="card-header">
+                <h1>Reservation Summary</h1>
+                <div class="user-info">
+                    <div class="info-group">
+                        <div class="info-label">Name</div>
+                        <div class="info-value">John Doe</div>
+                    </div>
+                    <div class="info-group">
+                        <div class="info-label">Gmail</div>
+                        <div class="info-value">johndoe@gmail.com</div>
+                    </div>
+                </div>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Reservation Type</th>
+                            <th>Item and Quantity</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Conference Room</td>
+                            <td>Meeting Room A</td>
+                            <td>June 12, 2025</td>
+                            <td>10:00 AM - 12:00 PM</td>
+                            <td><button class="action-btn"><i class="fas fa-trash-alt"></i> Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>Equipment</td>
+                            <td>Projector (x1), Microphone (x2)</td>
+                            <td>June 15, 2025</td>
+                            <td>2:00 PM - 4:00 PM</td>
+                            <td><button class="action-btn"><i class="fas fa-trash-alt"></i> Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="confirm-section">
+                    <h2>Confirm Reservation</h2>
+                    <div class="notes">
+                        <ul>
+                            <li>View inventory to check available items before booking</li>
+                            <li>Only approved requests will reserve the item or lab room</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                <div class="btn-group"><button class="confirm-btn">Confirm Reservation</button></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer placeholder - can be replaced later -->
+    <div class="footer-placeholder">
+        <footer>
+  <div>© 2025 SciLabReserve - All rights reserved</div>
+  <div class="socials">
+    <img src="imgs/fb-logo.png" class="social-logos" alt="Facebook">
+    <img src="imgs/ig.png" class="social-logos" alt="Instagram">
+    <img src="imgs/github.png" class="social-logos" alt="GitHub">
+    <img src="imgs/x.png" class="social-logos" alt="X (Twitter)">
+  </div>
+  <div>Contacts</div>
+</footer>
+    </div>
+    
+    <script src="javascript/user-summary.js"></script>
+</body>
+</html>

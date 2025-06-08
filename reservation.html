@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Calendar & Time Slots</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 480px;
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  #current-month {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  button {
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+
+  .calendar-day {
+    position: relative;
+    border: 1px solid #ddd;
+    padding: 8px 5px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 4px;
+    min-height: 40px;
+    box-sizing: border-box;
+  }
+
+  .calendar-day.empty {
+    cursor: default;
+    background: #f9f9f9;
+    border: none;
+  }
+
+  .calendar-day.past {
+    color: #999;
+    cursor: default;
+  }
+
+  .calendar-day.today {
+    background-color: #e0f0ff;
+    font-weight: bold;
+    border-color: #2196f3;
+  }
+
+  .calendar-day.selected {
+    background-color: #2196f3;
+    color: white;
+    font-weight: bold;
+  }
+
+  .calendar-day .day-number {
+    pointer-events: none;
+  }
+
+  /* Reservation dot */
+  .calendar-day > div:last-child {
+    pointer-events: none;
+  }
+
+  #selected-date {
+    margin: 15px 0;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  #time-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .time-slot {
+    padding: 8px 12px;
+    border: 1px solid #2196f3;
+    border-radius: 20px;
+    cursor: pointer;
+    user-select: none;
+    min-width: 80px;
+    text-align: center;
+    font-size: 0.9em;
+  }
+
+  .time-slot.booked {
+    background-color: #ddd;
+    border-color: #999;
+    color: #666;
+    cursor: not-allowed;
+  }
+
+  .time-slot.selected {
+    background-color: #2196f3;
+    color: white;
+    border-color: #1976d2;
+  }
+</style>
+</head>
+<body>
+
+<h2>Calendar & Time Slot Picker</h2>
+
+<div class="calendar-header">
+  <button id="prev-month">&lt;</button>
+  <div id="current-month"></div>
+  <button id="next-month">&gt;</button>
+</div>
+
+<!-- Weekday headers -->
+<div class="calendar-grid">
+  <div><strong>Sun</strong></div>
+  <div><strong>Mon</strong></div>
+  <div><strong>Tue</strong></div>
+  <div><strong>Wed</strong></div>
+  <div><strong>Thu</strong></div>
+  <div><strong>Fri</strong></div>
+  <div><strong>Sat</strong></div>
+</div>
+
+<!-- Calendar days grid -->
+<div class="calendar-grid" id="calendar-grid"></div>
+
+<div id="selected-date">Select a date</div>
+
+<div id="time-slots"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+    let selectedDate = null;
+
+    // Sample reservations (date and time string)
+    let reservations = [
+        { id: 1, date: new Date(2023, 5, 15), time: '10:00 AM' },
+        { id: 2, date: new Date(2023, 5, 18), time: '2:30 PM' },
+        { id: 3, date: new Date(2023, 5, 20), time: '4:00 PM' }
+    ];
+
+    // Elements
+    const currentMonthElement = document.getElementById('current-month');
+    const calendarGrid = document.getElementById('calendar-grid');
+    const prevMonthBtn = document.getElementById('prev-month');
+    const nextMonthBtn = document.getElementById('next-month');
+    const selectedDateElement = document.getElementById('selected-date');
+    const timeSlotsContainer = document.getElementById('time-slots');
+
+    // Initialize calendar
+    renderCalendar(currentMonth, currentYear);
+
+    prevMonthBtn.addEventListener('click', () => {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        renderCalendar(currentMonth, currentYear);
+    });
+
+    nextMonthBtn.addEventListener('click', () => {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        renderCalendar(currentMonth, currentYear);
+    });
+
+    function renderCalendar(month, year) {
+        // Clear previous days except weekday headers
+        calendarGrid.innerHTML = '';
+
+        const monthNames = ["January", "February", "March", "April", "May", "June", 
+                           "July", "August", "September", "October", "November", "December"];
+        currentMonthElement.textContent = `${monthNames[month]} ${year}`;
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        // Empty placeholders for first day alignment
+        for (let i = 0; i < firstDay; i++) {
+            const emptyDay = document.createElement('div');
+            emptyDay.classList.add('calendar-day', 'empty');
+            calendarGrid.appendChild(emptyDay);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayElement = document.createElement('div');
+            dayElement.classList.add('calendar-day');
+            dayElement.innerHTML = `<div class="day-number">${day}</div>`;
+
+            const currentDate = new Date(year, month, day);
+
+            if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                dayElement.classList.add('today');
+            }
+
+            if (currentDate < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
+                dayElement.classList.add('past');
+            } else {
+                dayElement.addEventListener('click', () => selectDate(day, month, year));
+            }
+
+            // Mark days with reservations
+            const dateReservations = reservations.filter(res =>
+                res.date.getDate() === day &&
+                res.date.getMonth() === month &&
+                res.date.getFullYear() === year
+            );
+            if (dateReservations.length > 0) {
+                const reservationDot = document.createElement('div');
+                reservationDot.style.position = 'absolute';
+                reservationDot.style.bottom = '5px';
+                reservationDot.style.left = '50%';
+                reservationDot.style.transform = 'translateX(-50%)';
+                reservationDot.style.width = '8px';
+                reservationDot.style.height = '8px';
+                reservationDot.style.backgroundColor = '#2196f3';
+                reservationDot.style.borderRadius = '50%';
+                dayElement.appendChild(reservationDot);
+            }
+
+            calendarGrid.appendChild(dayElement);
+        }
+    }
+
+    function selectDate(day, month, year) {
+        // Remove previous selection
+        document.querySelectorAll('.calendar-day.selected').forEach(el => {
+            el.classList.remove('selected');
+        });
+
+        // Select clicked day
+        const days = [...document.querySelectorAll('.calendar-day:not(.empty):not(.past)')];
+        const dayElement = days.find(el => el.querySelector('.day-number').textContent == day);
+        if (dayElement) {
+            dayElement.classList.add('selected');
+        }
+
+        selectedDate = new Date(year, month, day);
+        selectedDateElement.textContent = selectedDate.toLocaleDateString('en-US', {
+            weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+        });
+
+        generateTimeSlots();
+    }
+
+    function generateTimeSlots() {
+        timeSlotsContainer.innerHTML = '';
+
+        if (!selectedDate) return;
+
+        const startHour = 9;
+        const endHour = 17;
+
+        for (let hour = startHour; hour < endHour; hour++) {
+            for (let minute = 0; minute < 60; minute += 30) {
+                const time = new Date(selectedDate);
+                time.setHours(hour, minute, 0, 0);
+
+                const formattedTime = time.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+
+                const isBooked = reservations.some(res =>
+                    res.date.getDate() === selectedDate.getDate() &&
+                    res.date.getMonth() === selectedDate.getMonth() &&
+                    res.date.getFullYear() === selectedDate.getFullYear() &&
+                    res.time === formattedTime
+                );
+
+                const timeSlot = document.createElement('div');
+                timeSlot.classList.add('time-slot');
+                if (isBooked) {
+                    timeSlot.classList.add('booked');
+                } else {
+                    timeSlot.addEventListener('click', () => {
+                        timeSlot.classList.toggle('selected');
+                    });
+                }
+                timeSlot.textContent = formattedTime;
+
+                timeSlotsContainer.appendChild(timeSlot);
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

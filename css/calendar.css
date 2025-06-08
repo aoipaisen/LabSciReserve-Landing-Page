@@ -1,0 +1,116 @@
+ body {
+    font-family: Arial, sans-serif;
+    max-width: 480px;
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  #current-month {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  button {
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+
+  .calendar-day {
+    position: relative;
+    border: 1px solid #ddd;
+    padding: 8px 5px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 4px;
+    min-height: 40px;
+    box-sizing: border-box;
+  }
+
+  .calendar-day.empty {
+    cursor: default;
+    background: #f9f9f9;
+    border: none;
+  }
+
+  .calendar-day.past {
+    color: #999;
+    cursor: default;
+  }
+
+  .calendar-day.today {
+    background-color: #e0f0ff;
+    font-weight: bold;
+    border-color: #2196f3;
+  }
+
+  .calendar-day.selected {
+    background-color: #2196f3;
+    color: white;
+    font-weight: bold;
+  }
+
+  .calendar-day .day-number {
+    pointer-events: none;
+  }
+
+  /* Reservation dot */
+  .calendar-day > div:last-child {
+    pointer-events: none;
+  }
+
+  #selected-date {
+    margin: 15px 0;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  #time-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .time-slot {
+    padding: 8px 12px;
+    border: 1px solid #2196f3;
+    border-radius: 20px;
+    cursor: pointer;
+    user-select: none;
+    min-width: 80px;
+    text-align: center;
+    font-size: 0.9em;
+  }
+
+  .time-slot.booked {
+    background-color: #ddd;
+    border-color: #999;
+    color: #666;
+    cursor: not-allowed;
+  }
+
+  .time-slot.selected {
+    background-color: #2196f3;
+    color: white;
+    border-color: #1976d2;
+  }
